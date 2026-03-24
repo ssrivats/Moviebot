@@ -9,7 +9,7 @@ logger = logging.getLogger(__name__)
 
 TELEGRAM_TOKEN = os.environ.get("TELEGRAM_TOKEN")
 if not TELEGRAM_TOKEN:
-    raise ValueError("TELEGRAM_TOKEN environment variable is required!")
+    raise ValueError("TELEGRAM_TOKEN is required!")
 
 user_watches = {}  # user_id → list of event_codes
 
@@ -25,7 +25,7 @@ def extract_event_code(text: str):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🎬 *BMS Watchlist Bot*\n\n"
-        "Send the **full BMS movie link** to start monitoring ELITE seats.\n\n"
+        "Paste the **full BMS movie link** to start monitoring ELITE seats at your 3 PVRs.\n\n"
         "Commands:\n"
         "/list - Show your watches\n"
         "/stop ETxxxxxx - Stop monitoring a movie"
@@ -34,7 +34,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def add_movie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     text = update.message.text.strip()
     event_code = extract_event_code(text)
-
+    
     if not event_code:
         await update.message.reply_text(
             "❌ Could not find ET code.\n\n"
