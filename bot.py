@@ -25,10 +25,12 @@ def extract_event_code(text: str):
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "🎬 *BMS Watchlist Bot*\n\n"
-        "Paste the **full BMS movie link** to start monitoring ELITE seats at your 3 PVRs.\n\n"
+        "Paste the **full BMS movie link** to start monitoring ELITE seats.\n\n"
+        "Example:\n"
+        "https://in.bookmyshow.com/movies/chennai/youth/ET00485590\n\n"
         "Commands:\n"
         "/list - Show your watches\n"
-        "/stop ETxxxxxx - Stop monitoring a movie"
+        "/stop ETxxxxxx - Stop monitoring"
     )
 
 async def add_movie(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -38,8 +40,7 @@ async def add_movie(update: Update, context: ContextTypes.DEFAULT_TYPE):
     if not event_code:
         await update.message.reply_text(
             "❌ Could not find ET code.\n\n"
-            "Please paste the **full BMS movie link**.\n"
-            "Example: https://in.bookmyshow.com/movies/chennai/youth/ET00485590"
+            "Please paste the **full BMS movie link**."
         )
         return
 
